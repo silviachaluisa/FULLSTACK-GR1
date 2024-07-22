@@ -6,6 +6,8 @@ const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
     //Cargar la info del perfil del usuario - login
     const [auth, setAuth] = useState({})
+    const [data, setData] = useState("Info del context")
+    
     
     const perfil = async(token) => {
         try {
@@ -34,7 +36,9 @@ const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={
             {
                 auth,
-                setAuth              
+                setAuth,
+                data,
+                setData           
             }
         }>
             {children}
@@ -45,3 +49,4 @@ export {
     AuthProvider
 }
 export default AuthContext
+///nfdgjhgfd
