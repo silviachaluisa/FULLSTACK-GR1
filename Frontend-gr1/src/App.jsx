@@ -14,6 +14,7 @@ import Actualizar from './paginas/Actualizar'
 import Perfil from './paginas/Perfil'
 import { Confirmar } from './paginas/Confirmar'
 import Restablecer from './paginas/Restablecer'
+import { AuthProvider } from '../../Backend-gr1/src/context/AuthProvider'
 
 
 
@@ -21,6 +22,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
+      <AuthProvider>
       <Routes>
         
         <Route index element={<LandinPage/>}/>
@@ -46,6 +48,7 @@ function App() {
 
 
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
     </>
   )
