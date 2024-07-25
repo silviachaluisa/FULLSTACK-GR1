@@ -26,10 +26,11 @@ const Login = () => {
 	            const url = `${import.meta.env.VITE_BACKEND_URL}/login`
 	            const respuesta= await axios.post(url,form)
 	            localStorage.setItem('token',respuesta.data.token)
-	            setAuth(respuesta.data)
+	            //setAuth(respuesta.data)
 	            navigate('/dashboard')
 	        } catch (error) {
-	            setMensaje({respuesta:error.response.data.msg,tipo:false})
+                console.log(error)
+	            //setMensaje({respuesta:error.response.data.msg,tipo:false})
 	            setform({})
 	            setTimeout(() => {
 	                setMensaje({})
