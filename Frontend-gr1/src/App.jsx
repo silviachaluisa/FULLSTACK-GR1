@@ -17,7 +17,6 @@ import Restablecer from './paginas/Restablecer'
 import { AuthProvider } from '../../Backend-gr1/src/context/AuthProvider'
 
 
-
 function App() {
   return (
     <>
@@ -35,15 +34,20 @@ function App() {
           <Route path='recuperar-password/:token' element={<Restablecer/>}/>
           <Route path='*' element={<NotFound />} />
         </Route>
-
-        <Route path='/dashboard' element={<Dashboard/>}>
-          <Route index element={<Perfil/>}/>
-          <Route path='listar' element={<Listar/>}/>
-          <Route path='visualizar/:id' element={<Visualizar/>}/>
-          <Route path='crear' element={<Crear/>}/>
-          <Route path='actualizar/:id' element={<Actualizar/>}/>
-        </Route>
-
+        
+        <Route path='dashboard/*' element={
+      
+        <Routes>
+          <Route element={<Dashboard />}>
+            <Route index element={<Perfil />} />
+            <Route path='listar' element={<Listar />} />
+            <Route path='visualizar/:id' element={<Visualizar />} />
+            <Route path='crear' element={<Crear />} />
+            <Route path='actualizar/:id' element={<Actualizar />} />
+          </Route>
+        </Routes>
+      
+} />
 
 
 
@@ -54,4 +58,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Navigate, Outlet, useLocation } from 'react-router-dom'
 import AuthContext from '../../../Backend-gr1/src/context/AuthProvider'
 
 
@@ -7,6 +7,9 @@ const Dashboard = () => {
     const location = useLocation()
     const urlActual = location.pathname
     const {auth} = useContext(AuthContext)
+
+    const autenticado=localStorage.getItem('token')
+
     return (
         <div className='md:flex md:min-h-screen'>
 
@@ -45,11 +48,14 @@ const Dashboard = () => {
                     </div>
                     <div>
                         <Link to='/' className=" text-white mr-3 text-md block hover:bg-red-900 text-center
-                        bg-red-800 px-4 py-1 rounded-lg">Salir</Link>
+                        bg-red-800 px-4 py-1 rounded-lg"
+                        onClick={()=>{localStorage.removeItem('token')}}
+                        >Salir</Link>
                     </div>
                 </div>
                 <div className='overflow-y-scroll p-8'>
-                    <Outlet />
+             
+                <Outlet/>
                 </div>
                 <div className='bg-gray-800 h-12'>
                     <p className='text-center  text-slate-100 leading-[2.9rem] underline'>Todos los derechos reservados</p>
