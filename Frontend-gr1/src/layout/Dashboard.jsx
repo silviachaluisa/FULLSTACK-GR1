@@ -1,6 +1,8 @@
 import { useContext } from 'react'
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom'
-import AuthContext from '../../../Backend-gr1/src/context/AuthProvider'
+import AuthProvider from "../context/AuthProvider";
+
+
 
 
 const Dashboard = () => {

@@ -14,7 +14,7 @@ import Actualizar from './paginas/Actualizar'
 import Perfil from './paginas/Perfil'
 import { Confirmar } from './paginas/Confirmar'
 import Restablecer from './paginas/Restablecer'
-import { AuthProvider } from '../../Backend-gr1/src/context/AuthProvider'
+import { AuthProvider } from './context/AuthProvider'
 
 
 function App() {
