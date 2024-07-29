@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import {  useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Mensaje from "./Alertas";
@@ -40,7 +40,8 @@ export const Formulario = () => {
                 navigate('/dashboard/listar');
             }, 3000);
         } catch (error) {
-						setMensaje({ respuesta: error.response.data.msg, tipo: false })
+            console.log(error);
+						//setMensaje({ respuesta: error.response.data.msg, tipo: false })
             setTimeout(() => {
                 setMensaje({})
             }, 3000);
