@@ -1,12 +1,9 @@
-
 //Importar mongoose
 import mongoose from 'mongoose'
-
 
 // Pertimitir que solo los campos definidos en el Schema sean almacenados
 // enn la BDD
 mongoose.set('strictQuery', true)
-
 
 // Crear una función llamada connection()
 const connection = async()=>{
@@ -23,6 +20,5 @@ const connection = async()=>{
     }
 }
 
-
 //Exportar la función
-export default  connection
+export default  connection;

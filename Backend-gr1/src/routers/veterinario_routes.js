@@ -41,7 +41,7 @@ router.post("/nuevo-password/:token", nuevoPassword);
 
 
 // Rutas privadas
-router.get("/perfil",verificarAutenticacion , perfil,);
+router.get("/perfil",verificarAutenticacion , perfil);
 
 
 
