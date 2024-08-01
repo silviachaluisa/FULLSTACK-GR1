@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MdDeleteForever,MdNoteAdd,MdInfo } from "react-icons/md";
+import { MdDeleteForever,MdNoteAdd,MdInfo, MdNavigateBefore } from "react-icons/md";
 import axios from 'axios'
 import Mensaje from "./Alertas";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +27,29 @@ const Tabla = () => {
             console.log(error);
         }
     }
+    //Para eliminar un registro de la lista
+    const handleDelete = async (id) => {
+        try {
+            const confirmar = confirm("Vas a registrar la salida de un paciente, ¿Estás seguro de realizar esta acción?")
+            if (confirmar) {
+                const token = localStorage.getItem('token')
+                const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/eliminar/${id}`
+                const headers= {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                const data ={
+                    salida:new Date().toString()
+                }
+                await axios.delete(url, {headers, data});
+                listarPacientes()
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    
     //Solo para que se ejecute un sola vez
     useEffect(() => {
         listarPacientes()
@@ -71,9 +94,10 @@ const Tabla = () => {
                                         onClick={() => navigate(`/dashboard/visualizar/${paciente._id}`)}
                                          />
                                         
-                                        <MdInfo className="h-7 w-7 text-slate-800 cursor-pointer inline-block mr-2" />
-
-                                        <MdDeleteForever className="h-7 w-7 text-red-900 cursor-pointer inline-block" />
+                                        <MdInfo className="h-7 w-7 text-slate-800 cursor-pointer inline-block mr-2" 
+                                        onClick={()=>{navigate(`/dashboard/actualizar/${paciente._id}`)}}/>
+                                
+                                        <MdDeleteForever className="h-7 w-7 text-red-900 cursor-pointer inline-block"  onClick={()=>{handleDelete(paciente._id)}}/>  
                                     </td>
                                 </tr>
                             ))
