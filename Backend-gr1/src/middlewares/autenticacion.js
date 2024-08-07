@@ -31,12 +31,14 @@ if(!req.headers.authorization) return res.status(404).json({msg:"Lo sentimos, de
         if (rol==="veterinario"){
             // Obtener el usuario 
             req.veterinarioBDD = await Veterinario.findById(id).lean().select("-password")
+            req.veterinarioBDD.rol = "veterinario"
             // Continue el proceso
             next()
         }
         else{
             console.log(id,rol);
             req.pacienteBDD = await Paciente.findById(id).lean().select("-password")
+            req.pacienteBDD.rol = "paciente"
             console.log(req.pacienteBDD);
             next()
         }

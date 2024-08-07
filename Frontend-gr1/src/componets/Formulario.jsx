@@ -1,12 +1,12 @@
-import {  useState } from "react"
+import {  useState, useContext } from "react"
+import AuthContext from "../context/AuthProvider";
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Mensaje from "./Alertas";
 
 export const Formulario = ({paciente}) => {
-    console.log(paciente);
-
     const navigate = useNavigate()
+    const { auth } = useContext(AuthContext)
     const [mensaje, setMensaje] = useState({})
     const [form, setform] = useState({
         nombre: paciente?.nombre ??"",
@@ -57,7 +57,9 @@ export const Formulario = ({paciente}) => {
 		                navigate('/dashboard/listar');
 		            }, 3000);
 		        } catch (error) {
-								setMensaje({ respuesta: error.response.data.msg, tipo: false })
+                    console.log(error);
+                    
+                        //setMensaje({ respuesta: error, tipo: false })
 		            setTimeout(() => {
 		                setMensaje({})
 		            }, 3000);
