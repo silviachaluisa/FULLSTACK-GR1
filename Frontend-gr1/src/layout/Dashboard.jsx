@@ -18,7 +18,7 @@ const Dashboard = () => {
 
                 <img src="https://cdn-icons-png.flaticon.com/512/2138/2138508.png" alt="img-client" className="m-auto mt-8 p-1 border-2 border-slate-500 rounded-full" width={120} height={120} />
                 <p className='text-slate-400 text-center my-4 text-sm'> <span className='bg-green-600 w-3 h-3 inline-block rounded-full'></span> Bienvenido - {auth?.nombre}</p>
-                <p className='text-slate-400 text-center my-4 text-sm'> Rol - {auth?.rol}</p>
+                <p className='text-slate-400 text-center my-4 text-sm'> <span className='bg-red-600 w-3 h-3 inline-block rounded-full'></span> Rol - {auth?.rol}</p>
                 <hr className="mt-5 border-slate-500" />
 
                 <ul className="mt-5">

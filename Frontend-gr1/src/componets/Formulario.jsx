@@ -1,12 +1,12 @@
-import {  useState } from "react"
+import {  useState, useContext } from "react"
+import AuthContext from "../context/AuthProvider";
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Mensaje from "./Alertas";
 
 export const Formulario = ({paciente}) => {
-    console.log(paciente);
-
     const navigate = useNavigate()
+    const { auth } = useContext(AuthContext)
     const [mensaje, setMensaje] = useState({})
     const [form, setform] = useState({
         nombre: paciente?.nombre ??"",
@@ -26,45 +26,28 @@ export const Formulario = ({paciente}) => {
 
     const handleSubmit = async(e) => { 
         e.preventDefault()
-        //Actualización
-        if (paciente?._id) {
+        try {
             const token = localStorage.getItem('token')
-            const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/actualizar/${paciente?._id}`
-            const options = {
+            const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/registro`
+            const options={
                 headers: {
-                    method: 'PUT',
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                 }
             }
-            await axios.put(url, form, options)
-            navigate('/dashboard/listar')
+            await axios.post(url,form,options)
+						setMensaje({ respuesta:"Paciente registrado con exito y correo enviado", tipo: true })
+            setTimeout(() => {
+                navigate('/dashboard/listar');
+            }, 3000);
+        } catch (error) {
+						setMensaje({ respuesta: error.response.data.msg, tipo: false })
+            setTimeout(() => {
+                setMensaje({})
+            }, 3000);
         }
-        else {
-		        try {
-		            const token = localStorage.getItem('token')
-		            form.id = auth._id
-		            const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/registro`
-		            const options={
-		                headers: {
-		                    'Content-Type': 'application/json',
-		                    Authorization: `Bearer ${token}`
-		                }
-		            }
-		            await axios.post(url,form,options)
-								setMensaje({ respuesta:"paciente registrado con exito y correo enviado", tipo: true })
-		            setTimeout(() => {
-		                navigate('/dashboard/listar');
-		            }, 3000);
-		        } catch (error) {
-								setMensaje({ respuesta: error.response.data.msg, tipo: false })
-		            setTimeout(() => {
-		                setMensaje({})
-		            }, 3000);
-		        }
-        }
-        
     }
+
 
     return (
         
